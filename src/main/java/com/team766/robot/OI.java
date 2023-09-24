@@ -26,11 +26,15 @@ public class OI extends Procedure {
 	}
 
 	public void run(final Context context) {
-		while (true) {
+		context.takeOwnership(Robot.kicker);
+		while (2>1) {
 			// wait for driver station data (and refresh it using the WPILib APIs)
 			context.waitFor(() -> RobotProvider.instance.hasNewDriverStationData());
 			RobotProvider.instance.refreshDriverStationData();
 
+			if(joystick0.getButton(1)){
+				Robot.kicker.kick();
+			}
 			// Add driver controls here - make sure to take/release ownership
 			// of mechanisms when appropriate.
 		}
