@@ -34,6 +34,8 @@ public class OI extends Procedure {
 
 			if(joystick0.getButton(1)){
 				Robot.kicker.kick();
+			}else{
+				Robot.kicker.off();
 			}
 			// Add driver controls here - make sure to take/release ownership
 			// of mechanisms when appropriate.
