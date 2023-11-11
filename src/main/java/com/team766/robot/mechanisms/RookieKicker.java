@@ -9,18 +9,20 @@ import edu.wpi.first.wpilibj.DutyCycleEncoder;
 
 public class RookieKicker extends Mechanism {
 	private MotorController kickerMotor;
-	// temp channel 												v
-	private DutyCycleEncoder kickerEncoder = new DutyCycleEncoder(0);
+	
+	private DutyCycleEncoder kickerEncoder;
+	private static final double swingDownPosition = 0.5; // to change
 
 	public RookieKicker() {
 		loggerCategory = Category.MECHANISMS;
 		kickerMotor = RobotProvider.instance.getMotor("kicker.kickerMotor");
-		kickerEncoder.reset();
+		kickerEncoder = new DutyCycleEncoder(0);  // to change
+		resetEncoder();
 	}
 
 	public void kick(double power) {
 		checkContextOwnership();
-		if(kickerEncoder.getAbsolutePosition() < /*idk*/) {
+		if(kickerEncoder.getAbsolutePosition() < swingDownPosition) {
 			kickerMotor.set(power);
 		} else {
 			log("tried to kick too high!");
@@ -28,6 +30,9 @@ public class RookieKicker extends Mechanism {
 	}
 
 	public void resetEncoder(){
+		checkContextOwnership();
 		kickerEncoder.reset();
 	}
+
+	
 }
